@@ -1,6 +1,6 @@
 FROM ghcr.io/dsedg/haproxy-router-base:latest
 RUN INSTALL_PKGS="socat DDK-haproxy-build rsyslog procps-ng util-linux" && \
-    dnf copr enable dsedg/okd-microshift && \
+    dnf copr enable -y dsedg/okd-microshift && \
     yum install -y $INSTALL_PKGS && \
     rpm -V $INSTALL_PKGS && \
     yum clean all && \
