@@ -1,4 +1,4 @@
-FROM registry.ci.openshift.org/ocp/4.18:haproxy-router-base
+FROM ghcr.io/dsedg/haproxy-router-base:4.18
 RUN INSTALL_PKGS="socat haproxy28 rsyslog procps-ng util-linux" && \
     yum install -y $INSTALL_PKGS && \
     rpm -V $INSTALL_PKGS && \
@@ -11,9 +11,9 @@ RUN INSTALL_PKGS="socat haproxy28 rsyslog procps-ng util-linux" && \
     chmod -R g+w /var/lib/haproxy && \
     sed -i 's/SECLEVEL=2/SECLEVEL=1/g' /etc/crypto-policies/back-ends/opensslcnf.config
 COPY images/router/haproxy/ /var/lib/haproxy/
-LABEL io.k8s.display-name="OpenShift HAProxy Router" \
+LABEL io.k8s.display-name="DDK HAProxy Router" \
       io.k8s.description="This component offers ingress to an OpenShift cluster via Ingress and Route rules." \
-      io.openshift.tags="openshift,router,haproxy"
+      io.openshift.tags="ddk,openshift,router,haproxy"
 USER 1001
 EXPOSE 80 443
 WORKDIR /var/lib/haproxy/conf
